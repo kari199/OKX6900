@@ -1,0 +1,678 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>OKX6900 - The Math is Simple</title>
+    <link rel="icon" type="image/png" href="favicon.png">
+    <link rel="shortcut icon" type="image/png" href="favicon.png">
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700;800;900&display=swap');
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            background: #ffffff;
+            color: #000000;
+            line-height: 1.4;
+        }
+
+        /* Ticker */
+        .ticker {
+            background: #333333;
+            color: #ffffff;
+            padding: 15px 0;
+            overflow: hidden;
+            white-space: nowrap;
+            position: relative;
+        }
+
+        .ticker-content {
+            display: inline-block;
+            animation: ticker 30s linear infinite;
+            font-weight: 600;
+            font-size: 16px;
+        }
+
+        @keyframes ticker {
+            0% { transform: translateX(100%); }
+            100% { transform: translateX(-100%); }
+        }
+
+        /* Header */
+        header {
+            background: #ffffff;
+            padding: 20px 0;
+            border-bottom: 2px solid #000000;
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+        }
+
+        .header-content {
+            max-width: 1400px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 0 20px;
+        }
+
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+
+        .logo-circle {
+            width: 60px;
+            height: 60px;
+            background: linear-gradient(45deg, #FFD700, #FFA500);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 900;
+            font-size: 12px;
+            color: #000;
+            border: 3px solid #000;
+        }
+
+        .logo-text {
+            font-size: 32px;
+            font-weight: 900;
+            color: #000000;
+        }
+
+        .header-actions {
+            display: flex;
+            gap: 20px;
+            align-items: center;
+        }
+
+        .buy-chart-buttons {
+            display: flex;
+            gap: 15px;
+        }
+
+        .btn {
+            padding: 12px 24px;
+            border: 2px solid #000;
+            background: #fff;
+            color: #000;
+            text-decoration: none;
+            font-weight: 700;
+            font-size: 16px;
+            transition: all 0.2s ease;
+            text-transform: uppercase;
+        }
+
+        .btn:hover {
+            background: #000;
+            color: #fff;
+        }
+
+        .btn-buy {
+            background: #00ff00;
+            border-color: #00ff00;
+            color: #000;
+        }
+
+        .btn-buy:hover {
+            background: #000;
+            color: #00ff00;
+            border-color: #000;
+        }
+
+        .social-icons {
+            display: flex;
+            gap: 10px;
+        }
+
+        .social-icon {
+            width: 40px;
+            height: 40px;
+            background: #000;
+            color: #fff;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-decoration: none;
+            font-size: 18px;
+            transition: all 0.2s ease;
+        }
+
+        .social-icon:hover {
+            background: #333;
+        }
+
+        .contract-address {
+            font-size: 14px;
+            color: #666;
+            margin-top: 10px;
+        }
+
+        /* Main Content */
+        .main-content {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 40px 20px;
+        }
+
+        /* Hero Section */
+        .hero {
+            text-align: center;
+            margin-bottom: 60px;
+        }
+
+        .hero h1 {
+            font-size: clamp(32px, 6vw, 72px);
+            font-weight: 900;
+            margin-bottom: 20px;
+            text-transform: uppercase;
+        }
+
+        .hero p {
+            font-size: 24px;
+            font-weight: 600;
+            margin-bottom: 30px;
+        }
+
+        /* Content Blocks */
+        .content-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(400px, 1fr));
+            gap: 30px;
+            margin: 40px 0;
+        }
+
+        .content-block {
+            background: #f5f5f5;
+            border: 3px solid #000;
+            overflow: hidden;
+        }
+
+        .content-block img {
+            width: 100%;
+            height: 300px;
+            object-fit: cover;
+        }
+
+        .content-text {
+            padding: 25px;
+        }
+
+        .content-text h3 {
+            font-size: 24px;
+            font-weight: 800;
+            margin-bottom: 15px;
+            text-transform: uppercase;
+        }
+
+        .content-text p {
+            font-size: 16px;
+            font-weight: 500;
+            line-height: 1.5;
+        }
+
+        /* Stats Section */
+        .stats-section {
+            background: #000;
+            color: #fff;
+            padding: 60px 20px;
+            margin: 60px 0;
+        }
+
+        .stats-grid {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 40px;
+            text-align: center;
+        }
+
+        .stat-item h3 {
+            font-size: 48px;
+            font-weight: 900;
+            margin-bottom: 10px;
+            color: #fff;
+        }
+
+        .stat-item p {
+            font-size: 18px;
+            font-weight: 600;
+            text-transform: uppercase;
+        }
+
+        /* Math Section */
+        .math-section {
+            background: #f0f0f0;
+            padding: 60px 20px;
+            text-align: center;
+        }
+
+        .math-section h2 {
+            font-size: 48px;
+            font-weight: 900;
+            margin-bottom: 30px;
+            text-transform: uppercase;
+        }
+
+        .math-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .math-card {
+            background: #fff;
+            border: 3px solid #000;
+            padding: 30px;
+            text-align: center;
+        }
+
+        .math-card h3 {
+            font-size: 36px;
+            font-weight: 900;
+            margin-bottom: 15px;
+        }
+
+        .math-card p {
+            font-size: 18px;
+            font-weight: 600;
+        }
+
+        /* Meme Blocks */
+        .meme-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 20px;
+            margin: 40px 0;
+        }
+
+        .meme-block {
+            position: relative;
+            background: #000;
+            color: #fff;
+            min-height: 300px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            font-size: 24px;
+            font-weight: 800;
+            text-transform: uppercase;
+            padding: 30px;
+        }
+
+        .meme-block-1 {
+            background: linear-gradient(45deg, #ff6b6b, #ee5a24);
+        }
+
+        .meme-block-2 {
+            background: linear-gradient(45deg, #4834d4, #686de0);
+        }
+
+        .meme-block-3 {
+            background: linear-gradient(45deg, #00d2d3, #54a0ff);
+        }
+
+        /* Tokenomics */
+        .tokenomics {
+            background: #fff;
+            padding: 60px 20px;
+            border-top: 3px solid #000;
+            border-bottom: 3px solid #000;
+        }
+
+        .tokenomics h2 {
+            text-align: center;
+            font-size: 48px;
+            font-weight: 900;
+            margin-bottom: 40px;
+            text-transform: uppercase;
+        }
+
+        .tokenomics-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 60px;
+            max-width: 1000px;
+            margin: 0 auto;
+        }
+
+        .token-chart {
+            background: #f5f5f5;
+            border: 3px solid #000;
+            padding: 40px;
+            text-align: center;
+        }
+
+        .chart-circle {
+            width: 200px;
+            height: 200px;
+            border-radius: 50%;
+            background: conic-gradient(
+                #000 0deg 144deg,
+                #333 144deg 234deg,
+                #666 234deg 288deg,
+                #999 288deg 324deg,
+                #ccc 324deg 360deg
+            );
+            margin: 0 auto 30px;
+            border: 5px solid #000;
+        }
+
+        .token-details {
+            background: #f5f5f5;
+            border: 3px solid #000;
+            padding: 40px;
+        }
+
+        .token-row {
+            display: flex;
+            justify-content: space-between;
+            padding: 15px 0;
+            border-bottom: 2px solid #ddd;
+            font-weight: 600;
+        }
+
+        .token-row:last-child {
+            border-bottom: none;
+        }
+
+        .token-value {
+            font-weight: 900;
+        }
+
+        /* Footer */
+        footer {
+            background: #000;
+            color: #fff;
+            padding: 40px 20px;
+            text-align: center;
+        }
+
+        .footer-content {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .footer-links {
+            display: flex;
+            justify-content: center;
+            gap: 30px;
+            margin-bottom: 30px;
+        }
+
+        .footer-links a {
+            color: #fff;
+            text-decoration: none;
+            font-weight: 600;
+            text-transform: uppercase;
+        }
+
+        .footer-links a:hover {
+            color: #ccc;
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .header-content {
+                flex-direction: column;
+                gap: 20px;
+                text-align: center;
+            }
+
+            .content-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .tokenomics-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .hero h1 {
+                font-size: 48px;
+            }
+
+            .buy-chart-buttons {
+                flex-direction: column;
+            }
+        }
+
+        /* Special Effects */
+        .highlight {
+            background: #ffff00;
+            color: #000;
+            padding: 2px 6px;
+            font-weight: 900;
+        }
+
+        .bold-statement {
+            font-size: 28px;
+            font-weight: 900;
+            text-align: center;
+            margin: 40px 0;
+            text-transform: uppercase;
+            border: 3px solid #000;
+            padding: 30px;
+            background: #f0f0f0;
+        }
+    </style>
+</head>
+<body>
+    <!-- Ticker -->
+    <div class="ticker">
+        <div class="ticker-content">
+            OKX6900 TIMES 6900% = 138000 TRILLION MCAP • HISTORIANS HAD A CHANGE OF MIND • THE MOST SIGNIFICANT EVENT SINCE THE INVENTION OF MONEY • OKX6900 TIMES 6900% = 138000 TRILLION MCAP
+        </div>
+    </div>
+
+    <!-- Header -->
+    <header>
+        <div class="header-content">
+           <div class="logo">
+           <img src="Logo.png" alt="Logo OKX6900" style="height: 60px;">
+           <div class="logo-text">OKX6900</div>
+        </div>
+            
+            <div class="header-actions">
+                <div class="buy-chart-buttons">
+                    <a href="#" class="btn btn-buy">BUY</a>
+                    <a href="#" class="btn">CHART</a>
+                </div>
+                
+                <div class="social-icons">
+                    <a href="https://t.me/okx6900verify" class="social-icon">📱</a>
+                    <a href="https://x.com/OKX6900" class="social-icon">𝕏</a>
+                </div>
+            </div>
+        </div>
+        <div class="contract-address" style="text-align: center; margin-top: 10px;">
+            CA: CA OF OKX6900
+        </div>
+    </header>
+
+    <!-- Main Content -->
+    <div class="main-content">
+        <!-- Hero -->
+        <div class="hero">
+            <h1>HISTORIANS HAD A CHANGE OF MIND AND WILL SOON DECLARE OKX6900 AS THE <span class="highlight">'MOST SIGNIFICANT EVENT SINCE THE INVENTION OF MONEY'</span> 👀</h1>
+            <p>Time to rewrite the rules while achieving more than 6900% by recruiting the same <span class="highlight">6,900 traders</span> we all know about. 📈🔥</p>
+        </div>
+
+        <!-- Stats -->
+        <div class="stats-section">
+            <div class="stats-grid">
+                <div class="stat-item">
+                    <h3>$6,900</h3>
+                    <p>Current Price</p>
+                </div>
+                <div class="stat-item">
+                    <h3>6,900+</h3>
+                    <p>Diamond Hands</p>
+                </div>
+                <div class="stat-item">
+                    <h3>$69M</h3>
+                    <p>Market Cap Target</p>
+                </div>
+                <div class="stat-item">
+                    <h3>2.69%</h3>
+                    <p>Already Burnt</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- Math Section -->
+        <div class="math-section">
+            <h2>IT IS SIMPLE MATH WHERE 6900 > 500,<br>BUT ALSO 2.0 > 1.0</h2>
+            <div class="math-grid">
+                <div class="math-card">
+                    <h3>6900% × 6900%</h3>
+                    <p>The power of compound mathematics working for diamond hands only</p>
+                </div>
+                <div class="math-card">
+                    <h3>OKX6900 = 6900 × 2</h3>
+                    <p>× % OF TOTAL OKX VOLUME = ?</p>
+                </div>
+                <div class="math-card">
+                    <h3>BELIEVE IN A<br>SECOND CHANCE</h3>
+                    <p>We all get a second chance with OKX6900</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- Meme Blocks -->
+        <div class="meme-grid">
+            <div class="meme-block meme-block-1">
+                SPX6900 Marketcap is our vision and target. It represents growth, ambition, and the collective power of our community.<br><br>WE ALL GET A SECOND CHANCE<br><br>#OKX6900 #6900
+            </div>
+            <div class="meme-block meme-block-2">
+                IF YOU THINK #OKX6900 IS HIGH, DO THIS TIMES 2.0 NOW. GARY APPROVES.<br><br>NOW DO IT TIMES 2.0
+            </div>
+            <div class="meme-block meme-block-3">
+                FUCK I BOUGHT MORE THAN I COULD AFFORD BUT LET ME CALCULATE..<br><br>$OKB $4.15B, $OKX6900 MUST BE 2X THAT RIGHT? FUCK 1.4B? OK BUYING MORE
+            </div>
+        </div>
+
+        <!-- Bold Statement -->
+        <div class="bold-statement">
+            OKX6900 is nearing a 1B market cap, with more than 6900 investors and meme lovers joining in. Most of them are doing some research and looking into the contract address... 2.0
+        </div>
+
+        <!-- Tokenomics -->
+        <div class="tokenomics">
+            <h2>Tokenomics</h2>
+            <div class="tokenomics-grid">
+                <div class="token-chart">
+                    <h3>Token Distribution</h3>
+                    <div class="chart-circle"></div>
+                    <p><strong>1,000,000,000 OKX6900 Total Supply</strong></p>
+                </div>
+                <div class="token-details">
+                    <div class="token-row">
+                        <span>Total Supply</span>
+                        <span class="token-value">1,000,000,000 OKX6900</span>
+                    </div>
+                    <div class="token-row">
+                        <span>Liquidity Pool (20%)</span>
+                        <span class="token-value">200,000,000</span>
+                    </div>
+                    <div class="token-row">
+                        <span>Community (70%)</span>
+                        <span class="token-value">700,000,000</span>
+                    </div>
+                    <div class="token-row">
+                        <span>Marketing (5%)</span>
+                        <span class="token-value">50,000,000</span>
+                    </div>
+                    <div class="token-row">
+                        <span>Development (5%)</span>
+                        <span class="token-value">50,000,000</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Final Statement -->
+        <div class="bold-statement" style="background: #000; color: #fff;">
+            WE ALL GOT A SECOND CHANCE<br><br>TICKER: OKX6900
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <footer>
+        <div class="footer-content">
+            <div class="footer-links">
+                <a href="https://t.me/okx6900verify">Telegram</a>
+                <a href="https://x.com/OKX6900">X</a>
+                <a href="#">Email</a>
+                <a href="#">Chart</a>
+                <a href="#">Buy</a>
+            </div>
+            <p>2025 © ALL RIGHTS RESERVED</p>
+            <p style="margin-top: 20px; font-size: 14px; opacity: 0.8;">
+                Contract Source Code Verified • The Math is Simple • Believe in a Second Chance
+            </p>
+        </div>
+    </footer>
+
+    <script>
+        // Smooth scrolling for internal links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({
+                        behavior: 'smooth'
+                    });
+                }
+            });
+        });
+
+        // Add some dynamic interactions
+        const statsItems = document.querySelectorAll('.stat-item h3');
+        
+        function animateStats() {
+            statsItems.forEach((item, index) => {
+                if (item.textContent.includes('$')) {
+                    const baseValue = 6900;
+                    const randomChange = Math.floor(Math.random() * 100) - 50;
+                    const newValue = baseValue + randomChange;
+                    item.textContent = `$${newValue.toLocaleString()}`;
+                } else if (item.textContent.includes('%')) {
+                    const baseValue = 2.69;
+                    const randomChange = (Math.random() * 0.1) - 0.05;
+                    const newValue = Math.max(0, baseValue + randomChange);
+                    item.textContent = `${newValue.toFixed(2)}%`;
+                }
+            });
+        }
+
+        // Update stats every 10 seconds
+        setInterval(animateStats, 10000);
+
+        // Add hover effects to meme blocks
+        document.querySelectorAll('.meme-block').forEach(block => {
+            block.addEventListener('mouseenter', function() {
+                this.style.transform = 'scale(1.02)';
+                this.style.transition = 'transform 0.3s ease';
+            });
+            
+            block.addEventListener('mouseleave', function() {
+                this.style.transform = 'scale(1)';
+            });
+        });
+    </script>
+</body>
+</html>
